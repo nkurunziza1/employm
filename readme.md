@@ -22,7 +22,7 @@ npm install express dotenv zod mysql2 cors helmet express-rate-limit
 2. Apply **only** this day’s script:
 
    ```bash
-   mysql -u YOUR_USER -p employee_mgmt < backend/day-1/schema.sql
+   mysql -u root -p employee_mgmt < ./database/schema.sql
    ```
 
 Creates: `roles`, `permissions`, `role_permissions`.

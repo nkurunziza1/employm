@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-// import routes from './routes/index.js';
+import routes from "./routes/index.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { pingDatabase } from "./config/database.js";
 import { env } from "./config/env.js";
@@ -18,7 +18,7 @@ export function createApp() {
     cors({
       origin: process.env.CORS_ORIGIN ?? true,
       credentials: true,
-    })
+    }),
   );
   app.use(express.json({ limit: "1mb" }));
 
@@ -28,7 +28,7 @@ export function createApp() {
       max: 300,
       standardHeaders: true,
       legacyHeaders: false,
-    })
+    }),
   );
 
   app.get("/health", async (req, res, next) => {
@@ -55,8 +55,7 @@ export function createApp() {
     }
   });
 
-  //   app.use('/api', routes);
-
+  app.use("/api", routes);
   app.use(errorHandler);
 
   return app;
