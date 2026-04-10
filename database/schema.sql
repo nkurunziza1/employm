@@ -42,3 +42,30 @@ CREATE TABLE employees (
   hire_date DATE NULL,
   CONSTRAINT fk_emp_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+-- day 3
+CREATE TABLE tasks (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NULL,
+  status ENUM('pending','in_progress','done','cancelled') NOT NULL DEFAULT 'pending',
+  priority ENUM('low','medium','high') NOT NULL DEFAULT 'medium',
+  due_date DATE NULL,
+  assigned_to INT UNSIGNED NULL,
+  created_by INT UNSIGNED NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_task_assign FOREIGN KEY (assigned_to) REFERENCES employees(id) ON DELETE SET NULL,
+  CONSTRAINT fk_task_creator FOREIGN KEY (created_by) REFERENCES employees(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE attendance (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  employee_id INT UNSIGNED NOT NULL,
+  work_date DATE NOT NULL,
+  check_in TIME NULL,
+  check_out TIME NULL,
+  status ENUM('present','absent','leave','half_day') NOT NULL DEFAULT 'present',
+  notes TEXT NULL,
+  UNIQUE KEY uq_emp_date (employee_id, work_date),
+  CONSTRAINT fk_att_emp FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
