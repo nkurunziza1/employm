@@ -1,6 +1,6 @@
 # Day 1 — Backend foundation (Express + config + MySQL pool)
 
-## Topics to cover (in order)
+## Topics to cover (in order1)
 
 1. **Project layout** — `src/config`, `src/utils`, `src/middlewares`, `src/routes` (empty or stub).
 2. **`package.json`** — `express`, `dotenv`, `zod`, `mysql2`, `cors`, `helmet`, `express-rate-limit ...`.
